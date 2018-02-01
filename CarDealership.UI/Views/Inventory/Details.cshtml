@@ -1,0 +1,99 @@
+﻿@model CarDealership.Model.ViewModel.VechicleViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2> Vehicle Details</h2>
+
+<form>
+    <div style="border:solid;padding:10px">
+        <div class="row">
+            <div class="col-sm-2">
+                <strong>@Model.Year @Model.Make @Model.Model</strong>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="/Images/@Model.Picture" alt="Car Picture" />
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2" style="text-align:right">
+                        <strong>Body Style:</strong><br />
+                        <strong>Trans:</strong><br />
+                        <strong>Color:</strong>
+                    </div>
+                    <div class="col-md-2">
+                        @Model.BodyStyle <br />
+                        @Model.Transmission <br />
+                        @Model.Color
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <strong>Interior:</strong><br />
+                        <strong>Mileage:</strong><br />
+                        <strong>VIN #:</strong>
+                    </div>
+                    <div class="col-md-2">
+                        @Model.Interior <br />
+                        @Model.Mileage <br />
+                        <div id="VIN">@Model.VIN</div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <strong>Sale Price:</strong><br />
+                        <strong>MSRP:</strong><br />
+
+                    </div>
+                    <div class="col-md-2">
+                        @Model.SalesPrice.ToString("C0") <br />
+                        @Model.MSRP.ToString("C0") <br />
+
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:right">
+                        <strong>Description:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align:right">
+            <div class="col-md-offset-9 col-md-2">
+                @if (Model.StillAvailable == "Yes")
+            {
+                    <button id="@Model.InventoryId" type="button" class="btn btn-primary">Contact Us</button>
+                }
+                else
+                {
+                    <label style="color:red">Unavailable-Sold</label>
+                }
+
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    <script>
+        $('button').on('click', function (event) {
+
+            event.preventDefault();
+
+            var vinNumber = $('#VIN').html();
+            var searchString = $.param({ vin: vinNumber });
+
+            window.location = "/home/contact?" + searchString;
+
+        });
+
+
+
+    </script>
+
+}

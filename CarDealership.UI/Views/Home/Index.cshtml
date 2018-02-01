@@ -1,0 +1,101 @@
+﻿@model CarDealership.Model.ViewModel.HomePageViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron" style="background-image:url(../../Images/banner.jpg);color:chartreuse">
+    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators" style="bottom:-50px">
+                @for (int count = 0; count < Model.Specials.Count(); count++)
+                {
+                    if (count == 0)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@count.ToString()" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@count.ToString()"></li>
+
+                    }
+
+                }
+
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" data-slide-to="@Model.Specials.Count.ToString()">
+                @for (var item = 0; item < Model.Specials.Count; item++)
+                {
+
+                    if (item == 0)
+                    {
+                        <div class="item active" style="margin:auto">
+                            <a href='@Url.Action("Specials","Home")' )>
+                                <h2>@Model.Specials[item].Title</h2>
+                                <p>
+                                    @Model.Specials[item].Description
+                                </p>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item" style="margin:auto">
+                            <a href='@Url.Action("Specials","Home")' )>
+                                <h2>@Model.Specials[item].Title</h2>
+                                <p>
+                                    @Model.Specials[item].Description
+                                </p>
+                            </a>
+                        </div>
+                    }
+
+
+                }
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+<hr />
+<h1>Featured Vehicles</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="itemCollection" class="container">
+            @foreach (var item in Model.Featured)
+            {
+                <div class="col-md-3 text-center" style="border:solid">
+
+
+                    <img src="~/Images/@item.Picture" alt="@item.Picture" /><br />
+                    @item.Year &nbsp; @item.Make &nbsp; @item.Model
+                    <br />
+                    @item.SalesPrice.ToString("C0")
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#myCarousel').carousel();
+        })
+    </script>
+
+}

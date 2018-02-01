@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4338FC1E-B1EA-4425-A182-100D08D7710C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CarDealership.Data</RootNamespace>
+    <AssemblyName>CarDealership.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.2.0.4\lib\net45\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.3\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.3\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.3\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=8.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.8.7.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.2\lib\net451\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.3\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EF\EFProdRepo.cs" />
+    <Compile Include="EF\Storage.cs" />
+    <Compile Include="Factories\CarDearlershipRespoFacotory.cs" />
+    <Compile Include="Identity\AppRole .cs" />
+    <Compile Include="Identity\AppUser.cs" />
+    <Compile Include="Interfaces\ICarDealershipRepository.cs" />
+    <Compile Include="Migrations\201707261526362_init.cs" />
+    <Compile Include="Migrations\201707261526362_init.Designer.cs">
+      <DependentUpon>201707261526362_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707301526035_EF_init.cs" />
+    <Compile Include="Migrations\201707301526035_EF_init.Designer.cs">
+      <DependentUpon>201707301526035_EF_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707302140542_mergedDbContexts.cs" />
+    <Compile Include="Migrations\201707302140542_mergedDbContexts.Designer.cs">
+      <DependentUpon>201707302140542_mergedDbContexts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707302156171_Remove_FK_Makes.cs" />
+    <Compile Include="Migrations\201707302156171_Remove_FK_Makes.Designer.cs">
+      <DependentUpon>201707302156171_Remove_FK_Makes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707302231549_Add_FK_MakeId_to_Model.cs" />
+    <Compile Include="Migrations\201707302231549_Add_FK_MakeId_to_Model.Designer.cs">
+      <DependentUpon>201707302231549_Add_FK_MakeId_to_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708020225587_add_Profile.cs" />
+    <Compile Include="Migrations\201708020225587_add_Profile.Designer.cs">
+      <DependentUpon>201708020225587_add_Profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708020248356_remove_email_from_profile.cs" />
+    <Compile Include="Migrations\201708020248356_remove_email_from_profile.Designer.cs">
+      <DependentUpon>201708020248356_remove_email_from_profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708022255368_added_IsAccountEnabled.cs" />
+    <Compile Include="Migrations\201708022255368_added_IsAccountEnabled.Designer.cs">
+      <DependentUpon>201708022255368_added_IsAccountEnabled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708081819538_added_AdminId_To_MakeAndModel.cs" />
+    <Compile Include="Migrations\201708081819538_added_AdminId_To_MakeAndModel.Designer.cs">
+      <DependentUpon>201708081819538_added_AdminId_To_MakeAndModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801042131234_added_Vehicle_Pictures_Into_DB.cs" />
+    <Compile Include="Migrations\201801042131234_added_Vehicle_Pictures_Into_DB.Designer.cs">
+      <DependentUpon>201801042131234_added_Vehicle_Pictures_Into_DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310548039_added_Vechicle_Picture_URL.cs" />
+    <Compile Include="Migrations\201801310548039_added_Vechicle_Picture_URL.Designer.cs">
+      <DependentUpon>201801310548039_added_Vechicle_Picture_URL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MockRepository\CarListingsMockRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarDealership.Model\CarDealership.Model.csproj">
+      <Project>{f5d76a09-4851-4564-a3b8-9eaee2b1ade2}</Project>
+      <Name>CarDealership.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707261526362_init.resx">
+      <DependentUpon>201707261526362_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707301526035_EF_init.resx">
+      <DependentUpon>201707301526035_EF_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707302140542_mergedDbContexts.resx">
+      <DependentUpon>201707302140542_mergedDbContexts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707302156171_Remove_FK_Makes.resx">
+      <DependentUpon>201707302156171_Remove_FK_Makes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707302231549_Add_FK_MakeId_to_Model.resx">
+      <DependentUpon>201707302231549_Add_FK_MakeId_to_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708020225587_add_Profile.resx">
+      <DependentUpon>201708020225587_add_Profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708020248356_remove_email_from_profile.resx">
+      <DependentUpon>201708020248356_remove_email_from_profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708022255368_added_IsAccountEnabled.resx">
+      <DependentUpon>201708022255368_added_IsAccountEnabled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708081819538_added_AdminId_To_MakeAndModel.resx">
+      <DependentUpon>201708081819538_added_AdminId_To_MakeAndModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801042131234_added_Vehicle_Pictures_Into_DB.resx">
+      <DependentUpon>201801042131234_added_Vehicle_Pictures_Into_DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310548039_added_Vechicle_Picture_URL.resx">
+      <DependentUpon>201801310548039_added_Vechicle_Picture_URL.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

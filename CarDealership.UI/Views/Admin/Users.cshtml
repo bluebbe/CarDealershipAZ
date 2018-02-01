@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CarDealership.Model.ViewModel.UserFormVM>
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+@Html.ActionLink("Add a new User", "AddUser")
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.LastName</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Role</td>
+                    <td>@Html.ActionLink("edit", "EditUser/" + @item.UserId)</td>
+                </tr>
+
+            }
+
+
+        </tbody>
+    </table>
+</div>

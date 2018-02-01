@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CarDealership.Model.DataModel.SpecialAd>
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h1>Specials</h1>
+<div class="row" style="border:solid;padding:15px">
+    <form id="addForm" action="/admin/specialssave" method="post">
+        <div class="form-group row">
+            <label for="Title" class="col-sm-1 col-form-label">Title</label>
+            <div class="col-sm-11">
+                <input class="form-control" id="Title" placeholder="Title" name="Title" type="text" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Description" class="col-sm-1 col-form-label">Description</label>
+            <div class="col-sm-11">
+                <textarea rows="10" class="form-control" id="Description" placeholder="Description" name="Description"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-offset-1 col-sm-11">
+                <button id="0" type="submit" name="Save" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br />
+
+<div id="itemCollection">
+
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row" style="border:solid;padding:5px">
+        <form action="/admin/specialsdelete" method="post">
+        <div class="col-md-1">
+            <img src="~/Images/dollar-sign.jpg" alt="DollarSymbol" />
+        </div>
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-md-2"><strong>@item.Title</strong></div>
+                <div class="col-md-offset-9 col-md-1">
+                    <button  type="submit" class="btn btn-primary" name="SpecialId" value="@item.SpecialAdId" style="right:auto">Delete</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <p>
+                        @item.Description
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        </form>
+    </div>
+    <br />
+
+}

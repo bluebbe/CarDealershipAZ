@@ -1,0 +1,343 @@
+﻿@model CarDealership.Model.ViewModel.EditVehicleVM
+@{
+    ViewBag.Title = "EditVehicle";
+}
+
+<h2>Edit Vehicle</h2>
+<form id="editVehicleForm" action="/admin/editvehicle" method="post" enctype="multipart/form-data">
+    <input class="form-control" type="hidden" id="InventoryId" name="InventoryId" value="@Model.selectVehicle.InventoryId" />
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="make">Make</label>
+                <select class="form-control" id="Make" name="Make">
+                    @foreach (var item in Model.form.Make)
+                    {
+                        if (item.MakeName == Model.selectVehicle.Make)
+                        {
+                            <option selected="selected">@item.MakeName</option>
+                        }
+                        else
+                        {
+                            <option>@item.MakeName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" id="Type" name="Type">
+                    @foreach (var item in Model.form.Types)
+                    {
+                        if (item.TypeName == Model.selectVehicle.Type)
+                        {
+                            <option selected="selected">@item.TypeName</option>
+                        }
+                        else
+                        {
+                            <option>@item.TypeName</option>
+                        }
+
+                    }
+
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Year">Year</label>
+                <input type="text" class="form-control" id="Year" placeholder="Year" value="@Model.selectVehicle.Year" name="Year">
+            </div>
+
+            <div class="form-group">
+                <label for="color">Color</label>
+                <select class="form-control" id="Color" name="Color">
+
+                    @foreach (var item in Model.form.Color)
+                    {
+                        if (item.ColorName == Model.selectVehicle.Color)
+                        {
+                            <option selected="selected">@item.ColorName</option>
+                        }
+                        else
+                        {
+                            <option>@item.ColorName</option>
+                        }
+
+                    }
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Mileage">Mileage</label>
+                <input type="text" class="form-control" id="Mileage" name="Mileage" placeholder="Mileage" value="@Model.selectVehicle.Mileage">
+            </div>
+
+
+            <div class="form-group">
+                <label for="MSRP">MSRP</label>
+                <input type="text" class="form-control" id="MSRP" name="MSRP" placeholder="MSRP" value="@Model.selectVehicle.MSRP">
+            </div>
+        </div>
+
+
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select class="form-control" id="Model" name="Model">
+                    @foreach (var item in Model.form.Model)
+                    {
+                        if (item.ModelName == Model.selectVehicle.Model)
+                        {
+                            <option selected="selected">@item.ModelName</option>
+                        }
+                        else
+                        {
+                            <option>@item.ModelName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bodystyle">Body</label>
+                <select class="form-control" id="BodyStyle" name="BodyStyle">
+                    @foreach (var item in Model.form.BodyStyle)
+                    {
+                        if (item.BodyStyleName == Model.selectVehicle.BodyStyle)
+                        {
+                            <option selected="selected">@item.BodyStyleName</option>
+                        }
+                        else
+                        {
+                            <option>@item.BodyStyleName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transmission">Transmission</label>
+                <select class="form-control" id="Transmission" name="Transmission">
+                    @foreach (var item in Model.form.Transmission)
+                    {
+                        if (item.TransmissionName == Model.selectVehicle.Transmission)
+                        {
+                            <option selected="selected">@item.TransmissionName</option>
+                        }
+                        else
+                        {
+                            <option>@item.TransmissionName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="interior">Interior</label>
+                <select class="form-control" id="Interior" name="Interior">
+                    @foreach (var item in Model.form.Interior)
+                    {
+                        if (item.InteriorName == Model.selectVehicle.Interior)
+                        {
+                            <option selected="selected">@item.InteriorName</option>
+                        }
+                        else
+                        {
+                            <option>@item.InteriorName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="vin">VIN #</label>
+                <input type="text" class="form-control" id="VIN" name="VIN" placeholder="VIN" value="@Model.selectVehicle.VIN">
+            </div>
+
+            <div class="form-group">
+                <label for="SalesPrice">Sale Price</label>
+                <input type="text" class="form-control" id="SalesPrice" name="SalesPrice" placeholder="SalesPrice" value="@Model.selectVehicle.SalesPrice">
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <label for="Description">Description</label>
+            <div class="form-group">
+
+                <textarea class="form-control" rows="6" id="Description" name="Description" style="min-width: 80%">@Model.selectVehicle.Description</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <img src="/Images/@Model.selectVehicle.Picture" alt="@Model.selectVehicle.Picture" />
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label for="File">Replace Picture</label>
+                <input id="File" name="File" type="file" accept="image/jpeg,image/png" class="form-control" style="width:50%" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+
+            @if (Model.selectVehicle.FeatureVehicle)
+            {
+                <input id="FeatureVehicle" name="FeatureVehicle" type="checkbox" value="true" checked />
+            }
+            else
+
+            {
+                <input id="FeatureVehicle" name="FeatureVehicle" type="checkbox" value="true" />
+            }
+            <input name="FeatureVehicle" type="hidden" value="false" />
+            <label for="FeatureVehicle">
+                Feature this vechicle
+            </label>
+
+
+
+
+
+        </div>
+    </div>
+    <button type="submit" name="submit" value="Delete" class="btn btn-primary">Delete</button>
+    <button type="submit" name="submit" value="Save" class="btn btn-default">Save</button>
+</form>
+
+
+@section Scripts
+{
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+
+<script>
+    $.validator.addMethod("salesGreaterThanMSRP", function (value, element) {
+        return $('#MSRP').val() > $('#SalesPrice').val()
+    });
+    $.validator.addMethod("Mileage", function (value, element) {
+
+
+        var typeVehicle = $('#Type option:selected').val();
+        switch (typeVehicle) {
+            case 'New':
+                return (100000 >= $('#Mileage').val()) && ($('#Mileage').val() > 0);
+            case 'Used':
+                return (100000 < $('#Mileage').val());
+        }
+
+
+
+    });
+
+    var d = new Date();
+    var nextyear = d.getFullYear() + 1;
+    $('#editVehicleForm').validate({
+        rules: {
+            Year: {
+                required: true,
+                digits: true,
+                range: [2000, nextyear],
+                minlength: 4,
+                maxlength: 4
+            },
+            Mileage: {
+                required: true,
+                digits: true,
+                Mileage: true
+
+            },
+            SalesPrice:
+            {
+                required: true,
+                digits: true,
+                salesGreaterThanMSRP: true
+
+            },
+            MSRP:
+            {
+                required: true,
+                digits: true
+
+
+            },
+            Description:
+            {
+                required: true
+            }
+         
+
+        },
+        messages:
+        {
+            SalesPrice:
+            {
+                salesGreaterThanMSRP: jQuery.validator.format("Sale Price Greater than MSRP")
+            },
+
+            Mileage: {
+
+                Mileage: jQuery.validator.format("New Vehicle(0-100000), Used Vehicle(100000+)")
+
+            }
+
+        }
+
+
+    });
+
+
+</script>
+
+
+
+
+    <script>
+
+        $("#Make").change(function () {
+            var make = $('#Make option:selected').val();
+
+            findModels(make);
+
+
+        });
+
+
+        function findModels(make) {
+
+            $.ajax({
+                type: 'GET',
+                url: '/models/' + make,
+                contentType: 'application/json',
+                success: function (data) {
+
+                    $('#Model').empty()
+                    $.each(data, function (index, item) {
+                        $('#Model').append('<option>' + item.modelName + '</option');
+                    });
+
+
+                }
+            });
+        };
+
+    </script>
+
+}

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <img alt="Brand" src="~/Images/brand.jpg" style="max-height:50px">
+
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("New Inventory", "New", "Inventory")</li>
+                        <li>@Html.ActionLink("Used Inventory", "Used", "Inventory")</li>
+                        <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("sales"))
+                        {
+                            <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Vehicles", "Vehicles","Admin")</li>
+                                    <li>@Html.ActionLink("Add Makes", "Makes", "Admin")</li>
+                                    <li>@Html.ActionLink("Add Models", "Models", "Admin")</li>
+                                    <li>@Html.ActionLink("Add/Remove Specials", "Specials", "Admin")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                                    <li>@Html.ActionLink("Users", "Users","Admin")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    @Html.Partial("_Login")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

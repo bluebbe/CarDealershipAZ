@@ -1,0 +1,119 @@
+﻿@model CarDealership.Model.ViewModel.VechicleSearchViewModel
+@{
+    ViewBag.Title = "Sales";
+}
+
+<h2>Sales</h2>
+<div class="row" style="border:solid;padding:10px">
+
+    <form class="form-inline">
+        <div class="form-group col-md-4">
+            <label class="control-label" for="model">Quick Search</label><br />
+            <input type="text" class="form-control" id="search" placeholder="Enter make or model" style="width:100%">
+
+        </div>
+        <div class="form-group col-md-4">
+            <br />
+            <label class="control-label">Price</label>
+
+            <select id="minPrice" class="form-control">
+                <option>No Min</option>
+                @foreach (var item in Model.PriceOptions)
+            {
+                    <option>@item</option>
+                }
+
+            </select>
+            <select id="maxPrice" class="form-control">
+                <option>No Max</option>
+                @foreach (var item in Model.PriceOptions)
+            {
+                    <option>@item</option>
+                }
+            </select>
+            <br />
+            <div class="row col-md-offset-1">
+                <button id="btnSearch" type="submit" class="btn btn-primary" style="width:60%;margin-top:10px">Search</button>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <br />
+            <label class="control-label">Year</label>
+
+            <select id="minYear" class="form-control">
+                <option>No Min</option>
+                @foreach (var item in Model.YearOptions)
+            {
+                    <option>@item</option>
+                }
+            </select>
+            <select id="maxYear" class="form-control">
+                <option>No Max</option>
+                @foreach (var item in Model.YearOptions)
+            {
+                    <option>@item</option>
+                }
+            </select>
+        </div>
+    </form>
+</div>
+<br />
+<h2>Search Results</h2>
+<div id="searchresults" style="padding:0px">
+</div>
+
+@section Scripts
+{
+
+    <script src="~/Scripts/search.js"></script>
+    <script type="text/template" id="tmpl">
+
+        <div class="item" style="border:solid;padding:10px">
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong id="year">{{Year}}</strong><strong> &nbsp; {{Make}} &nbsp;{{Model}}</strong>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="/Images/{{Picture}}" alt="{{Picture}}" />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Body Style:</strong><br />
+                            <strong>Trans:</strong><br />
+                            <strong>Color:</strong>
+                        </div>
+                        <div class="col-md-2">
+                            {{BodyStyle}} <br />
+                            {{Transmission}} <br />
+                            {{Color}}
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Interior:</strong><br />
+                            <strong>Mileage:</strong><br />
+                            <strong>VIN #:</strong>
+                        </div>
+                        <div class="col-md-2">
+                            {{Interior}} <br />
+                            {{Mileage}} <br />
+                            {{VIN}}
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Sale Price:</strong><br />
+                            <strong>MSRP:</strong><br />
+
+                        </div>
+                        <div class="col-md-2">
+                            ${{SalesPrice}} <br />
+                            ${{MSRP}}<br />
+                            <button id="{{id}}" type="button" class="btn btn-primary detail">Purchase</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+}

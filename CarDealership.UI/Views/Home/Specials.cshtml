@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CarDealership.Model.DataModel.SpecialAd>
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h1>Specials</h1>
+@foreach (var item in Model)
+{
+    <div class="row" style="border:solid;padding:5px">
+        <div class="col-md-1">
+            <img src="~/Images/dollar-sign.jpg" alt="DollarSymbol" />
+        </div>
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-md-2"><strong>@item.Title</strong></div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <p>
+                        @item.Description
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+}

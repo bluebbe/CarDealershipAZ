@@ -1,0 +1,108 @@
+﻿@*@model CarDealership.Model.ViewModel.ContactUsViewModel*@
+@{
+    ViewBag.Title = "Contact Us";
+}
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <form id="contactUs" method="post" action="/home/contact">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" placeholder="Name" name="Name">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control contact-group" id="Email" placeholder="Email" name="Email">
+            </div>
+            <div class="form-group">
+                <label for="Phone">Phone</label>
+                <input type="tel" class="form-control contact-group" id="Phone" placeholder="Phone" name="Phone">
+            </div>
+            <div class="form-group">
+                <label for="Message">Message</label>
+                <textarea class="form-control" id="Message" style="overflow-y:scroll;height:200px;resize:none" name="Message">@Model.VIN</textarea>
+            </div>
+            <button id="Contact" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-offset-1 col-md-3">
+        <div id="map" style="width:400px;height:400px">
+
+        </div>
+        <div>
+            <p>
+                111 W Main St.<br />
+                Kent, OH 4444
+            </p>
+        </div>
+        <div>
+            <p>
+                Sales: 111-111-1111<br />
+                Service: 111-111-1112
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+    <script>
+      
+
+        $('#contactUs').validate({
+           rules: {
+               Name: "required",
+               Message: "required",
+               Phone: {
+                   require_from_group: [1, ".contact-group"]
+               },
+               Email: {
+                   require_from_group: [1, ".contact-group"]
+               }
+           }
+
+
+
+
+        });
+            
+
+
+
+
+
+
+      
+
+    </script>
+
+    <script>
+   
+
+        function myMap() {
+            var myLatlng = new google.maps.LatLng(41.1537862, -81.35825969999996);
+            var mapOptions = {
+                center: myLatlng,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title: "111 W Main St. Kent, OH 4444"
+            });
+
+
+            marker.setMap(map);
+        }
+
+   
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBABFgCbkBNIC2w55aWPGxGoNEcDF2jfVg&callback=myMap"></script>
+}

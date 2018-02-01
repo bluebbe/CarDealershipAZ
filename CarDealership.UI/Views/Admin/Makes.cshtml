@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CarDealership.Model.ViewModel.MakesVM>
+@{
+    ViewBag.Title = "Makes";
+}
+
+<h2>Makes</h2>
+<div class="row" style="border:solid;padding:10px">
+    <form action="\admin\makes" method="post" class="form-inline">
+        <div class="form-group col-md-5">
+            <label class="control-label" for="make">New Make</label>
+            <input type="text" class="form-control" id="Make" placeholder="" name="Make" style="width:80%">
+        </div>
+        <div class="form-group col-md-1">
+            <button id="addMake" type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Date Added</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MakeName</td>
+                        <td>@item.Created.ToString("MM/dd/yyyy")</td>
+                        <td>@item.User</td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>

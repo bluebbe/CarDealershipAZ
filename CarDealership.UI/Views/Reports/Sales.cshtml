@@ -1,0 +1,174 @@
+﻿@model IEnumerable<CarDealership.Model.ViewModel.UserFormVM>
+@{
+    ViewBag.Title = "Sales";
+}
+
+<h2>Sales</h2>
+
+<div class="row" style="border:solid;padding:10px">
+    <div class="row">
+        <div class="col-sm-1">
+            <label>Filters</label>
+        </div>
+    </div>
+
+    <form id="salesForm" class="form-inline">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label for="price">User</label>
+                    <select id="price" class="form-control">
+                        <option value="0">- All -</option>
+                        @foreach(var item in Model)
+                        {
+                            <option value="@item.UserId">@item.FirstName @item.LastName</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+
+                <div class="form-group">
+                    <label for="FromDate">From Date</label>
+                 
+                    <input class="form-control" id="FromDate" placeholder="FromDate" type="text" name="FromDate"  />
+                
+                 
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+
+                <div class="form-group">
+                    <label for="ToDate">To Date</label>
+                    <input class="form-control" id="ToDate" placeholder="ToDate" type="text" name="ToDate" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <br />
+        <button id="btnSearch" type="submit" class="btn btn-primary" style="width:20%">Search</button>
+
+    </form>
+
+</div>
+
+<div>
+    <h3>Search Results</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Total Sales</th>
+                <th>Total Vehicles</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts
+{
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            $('#FromDate').datepicker({
+             
+                autoclose: true,
+                maxDate: '0d',
+               autoUpdateInput: false
+            });
+         
+
+            $('#ToDate').datepicker({
+                startDate: '+1d',
+                autoclose: true,
+                maxDate: '0d',
+                autoUpdateInput: false
+            })
+
+
+
+        });
+
+
+
+
+        $('#btnSearch').on('click', function (event) {
+
+         
+            event.preventDefault();
+            var fromDate = $('#FromDate').val();
+            if (fromDate == '') fromDate = null
+        
+            var toDate = $('#ToDate').val();
+            if (toDate == '') toDate = null
+         
+
+
+
+            salesId = $('#price option:selected').val();
+            $('tbody').empty();
+            
+           
+            var saleRow = '<tr><td>{{Name}}</td><td>${{TotalSales}}</td><td>{{TotalCount}}</td></tr>'
+            var package = { parm: salesId, fromDate: fromDate, toDate: toDate};
+            var searchString = $.param(package);
+
+            $.ajax({
+                type: 'GET',
+                url: '/sales/search?' + searchString,
+                contentType: 'application/json',
+                success: function (data) {
+
+
+                    $.each(data, function (index, item) {
+
+                        var row = saleRow
+                            .replace('{{Name}}', $('#price').find('option[value='+item.id+']').html())
+                            .replace('{{TotalSales}}', item.totalSales.toLocaleString())
+                            .replace('{{TotalCount}}', item.totalCount);
+                       
+
+                        $('tbody').append(row);
+
+                    });
+
+                    console.log("it worked!");
+
+                },
+                error: function (a, b, c) {
+                    alert("failure");
+                }
+
+            });
+
+
+        });
+
+
+
+
+
+
+
+    </script>
+    
+    
+    
+    
+    
+    
+}

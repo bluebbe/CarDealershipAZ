@@ -1,0 +1,235 @@
+﻿@model CarDealership.Model.ViewModel.VechicleSearchViewModel
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Vehicles</h2>
+<div class="row" style="border:solid;padding:10px">
+
+    <form class="form-inline">
+        <div class="form-group col-md-4">
+            <label class="control-label" for="model">Quick Search</label><br />
+            <input type="text" class="form-control" id="search" placeholder="Enter make or model" style="width:100%">
+
+        </div>
+        <div class="form-group col-md-4">
+            <br />
+            <label class="control-label">Price</label>
+
+            <select id="minPrice" class="form-control">
+                <option>No Min</option>
+                @foreach (var item in Model.PriceOptions)
+                {
+                    <option>@item</option>
+                }
+
+            </select>
+            <select id="maxPrice" class="form-control">
+                <option>No Max</option>
+                @foreach (var item in Model.PriceOptions)
+                {
+                    <option>@item</option>
+                }
+            </select>
+            <br />
+            <div class="row col-md-offset-1">
+                <button id="btnSearch" type="submit" class="btn btn-primary" style="width:60%;margin-top:10px">Search</button>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <br />
+            <label class="control-label">Year</label>
+
+            <select id="minYear" class="form-control">
+                <option>No Min</option>
+                @foreach (var item in Model.YearOptions)
+                {
+                    <option>@item</option>
+                }
+            </select>
+            <select id="maxYear" class="form-control">
+                <option>No Max</option>
+                @foreach (var item in Model.YearOptions)
+                {
+                    <option>@item</option>
+                }
+            </select>
+        </div>
+    </form>
+</div>
+<br />
+<h2>Search Results</h2>
+<div id="searchresults" style="padding:0px">
+</div>
+
+@section Scripts
+{
+
+    <script>
+
+        $('#btnSearch').on('click', function (event) {
+
+            event.preventDefault();
+
+
+            $('#searchresults').empty();
+
+            var priceMin = $('#minPrice option:selected').index();
+            var priceMax = $('#maxPrice option:selected').index();
+            var yearMin = $('#minYear option:selected').index();
+            var yearMax = $('#maxYear option:selected').index();
+            if (priceMin != 0) {
+                priceMin = $('#minPrice option:selected').val();
+            }
+            else {
+                priceMin =  0
+            };
+
+            if (priceMax != 0) {
+                priceMax = $('#maxPrice option:selected').val();
+            }
+            else {
+                priceMax = Number.MAX_VALUE;
+            };
+
+            if (priceMax < priceMin) {
+                alert('Price Max is Lower than Price Min. Please adjust.');
+                return;
+            }
+
+
+
+            if (yearMin != 0) {
+                yearMin = $('#minYear option:selected').val();
+            }
+            else
+            { yearMin = 0 };
+
+
+
+            if (yearMax != 0) {
+                yearMax = $('#maxYear option:selected').val();
+            }
+            else
+            { yearMax = Number.MAX_VALUE };
+
+            if (yearMax < yearMin) {
+                alert('Year Max is Lower than Year Min. Please adjust. ');
+                return;
+            }
+
+
+            var search = $('#search').val();
+
+
+            var package = { keyWords: search, minPrice: priceMin, maxPrice: priceMax, minYear: yearMin, maxYear: yearMax, type: 'New', stillAvailable: true };
+            var searchString = $.param(package);
+
+            $.ajax({
+                type: 'GET',
+                url: '/inventory/new/search/?' + searchString,
+                contentType: 'application/json',
+                success: function (data) {
+
+
+                    $.each(data, function (index, item) {
+
+
+                        $('#tmpl').addClass('col-md-offset-1').attr("width", "167px");
+                        var template = $('#tmpl').html();
+
+
+                        var html = template
+
+                            .replace('{{Make}}', item.make)
+                            .replace('{{Model}}', item.model)
+                            .replace('{{Type}}', item.Type)
+                            .replace('{{BodyStyle}}', item.bodyStyle)
+                            .replace('{{Year}}', item.year)
+                            .replace('{{Transmission}}', item.transmission)
+                            .replace('{{Color}}', item.color)
+                            .replace('{{Interior}}', item.interior)
+                            .replace('{{Mileage}}', item.mileage)
+                            .replace('{{VIN}}', item.vin)
+                            .replace('{{MSRP}}', item.msrp.toLocaleString())
+                            .replace('{{SalesPrice}}', item.salesPrice.toLocaleString())
+                            .replace('{{Picture}}', item.picture)
+                            .replace('{{id}}', item.inventoryId);
+
+
+                        html = html + '<br />';
+
+
+                        $('#searchresults').append(html);
+
+                    });
+
+                    console.log("it worked!");
+
+                },
+                error: function (a, b, c) {
+                    alert("failure");
+                }
+
+            });
+
+
+        });
+
+
+
+    </script>
+    <script type="text/template" id="tmpl">
+
+        <div class="item" style="border:solid;padding:10px">
+            <form method="get" action="/inventory/details/{{id}}">
+            <div class="row">
+                    <div class="col-sm-2">
+                    <strong id="year">{{Year}}</strong><strong> &nbsp; {{Make}} &nbsp;{{Model}}</strong>
+                    </div>
+           </div>           
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="/Images/{{Picture}}" alt="{{Picture}}" />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Body Style:</strong><br />
+                            <strong>Trans:</strong><br />
+                            <strong>Color:</strong>
+                        </div>
+                        <div class="col-md-2">
+                            {{BodyStyle}} <br />
+                            {{Transmission}} <br />
+                            {{Color}}
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Interior:</strong><br />
+                            <strong>Mileage:</strong><br />
+                            <strong>VIN #:</strong>
+                        </div>
+                        <div class="col-md-2">
+                            {{Interior}} <br />
+                            {{Mileage}} <br />
+                            {{VIN}}
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <strong>Sale Price:</strong><br />
+                            <strong>MSRP:</strong><br />
+
+                        </div>
+                        <div class="col-md-2">
+                            ${{SalesPrice}} <br />
+                            ${{MSRP}}<br />
+                            <button id="{{id}}" type="submit" class="btn btn-primary detail">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </script>
+
+}

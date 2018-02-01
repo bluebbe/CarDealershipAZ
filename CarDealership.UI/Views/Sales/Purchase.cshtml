@@ -1,0 +1,264 @@
+﻿@model CarDealership.Model.ViewModel.PurchaseViewModel
+@{
+    ViewBag.Title = "Purchase";
+}
+
+<h2>Purchase Vehicle</h2>
+<div style="border:solid;padding:10px">
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>@Model.PurchasingVechicle.Year @Model.PurchasingVechicle.Make @Model.PurchasingVechicle.Model</strong>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <img src="/Images/@Model.PurchasingVechicle.Picture" alt="Car Picture" />
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-2" style="text-align:right">
+                    <strong>Body Style:</strong><br />
+                    <strong>Trans:</strong><br />
+                    <strong>Color:</strong>
+                </div>
+                <div class="col-md-2">
+                    @Model.PurchasingVechicle.BodyStyle <br />
+                    @Model.PurchasingVechicle.Transmission <br />
+                    @Model.PurchasingVechicle.Color
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <strong>Interior:</strong><br />
+                    <strong>Mileage:</strong><br />
+                    <strong>VIN #:</strong>
+                </div>
+                <div class="col-md-2">
+                    @Model.PurchasingVechicle.Interior <br />
+                    @Model.PurchasingVechicle.Mileage <br />
+                    @Model.PurchasingVechicle.VIN
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <strong>Sale Price:</strong><br />
+                    <strong>MSRP:</strong><br />
+
+                </div>
+                <div class="col-md-2">
+                    @Model.PurchasingVechicle.SalesPrice.ToString("C0")<br />
+                    @Model.PurchasingVechicle.MSRP.ToString("C0") <br />
+                    <input type="hidden" id="SalePrice" value="@Model.PurchasingVechicle.SalesPrice" />
+                    <input type="hidden" id="MSRP" value="@Model.PurchasingVechicle.MSRP" />
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2" style="text-align:right">
+                    <strong>Description:</strong>
+                </div>
+                <div class="col-md-8">
+                    <p>@Model.PurchasingVechicle.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Sales Information</h2>
+<form id="purchaseForm" method="post" action="/Sales/Purchase">
+    <input hidden id="VechicleId" name="VechicleId" value="@Model.PurchasingVechicle.InventoryId" />
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input id="Name" name="Name" type="text" class="form-control" placeholder="Name">
+            </div>
+        </div>
+
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Phone">Phone</label>
+                <input id="Phone" name="Phone" type="tel" class="form-control contact-group" placeholder="Phone">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input id="Email" name="Email" type="email" class="form-control contact-group" placeholder="Email">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Street1">Street 1</label>
+                <input id="Street1" name="Street1" type="text" class="form-control" placeholder="Street 1">
+            </div>
+        </div>
+
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Street2">Street 2</label>
+                <input id="Street2" name="Street2" type="text" class="form-control" placeholder="Street 2">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="City">City</label>
+                <input id="City" name="City" type="text" class="form-control" placeholder="City">
+            </div>
+        </div>
+
+
+        <div class="col-md-1">
+            <div class="form-group">
+                <label for="State">State</label>
+                <select class="form-control" id="State" name="State">
+                    <option>AL</option>
+                    <option>AK</option>
+                    <option>AZ</option>
+                    <option>AR</option>
+                    <option>CA</option>
+                    <option>CO</option>
+                    <option>CT</option>
+                    <option>DE</option>
+                    <option>FL</option>
+                    <option>GA</option>
+                    <option>HI</option>
+                    <option>ID</option>
+                    <option>IL</option>
+                    <option>IA</option>
+                    <option>KS</option>
+                    <option>KY</option>
+                    <option>LA</option>
+                    <option>ME</option>
+                    <option>MD</option>
+                    <option>MA</option>
+                    <option>MI</option>
+                    <option>MN</option>
+                    <option>MS</option>
+                    <option>MO</option>
+                    <option>MT</option>
+                    <option>NE</option>
+                    <option>NV</option>
+                    <option>NH</option>
+                    <option>NJ</option>
+                    <option>NM</option>
+                    <option>NY</option>
+                    <option>NC</option>
+                    <option>ND</option>
+                    <option>OH</option>
+                    <option>OK</option>
+                    <option>OR</option>
+                    <option>PA</option>
+                    <option>RI</option>
+                    <option>SC</option>
+                    <option>SD</option>
+                    <option>TN</option>
+                    <option>TX</option>
+                    <option>UT</option>
+                    <option>VT</option>
+                    <option>VA</option>
+                    <option>WA</option>
+                    <option>WV</option>
+                    <option>WI</option>
+                    <option>WY</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="zipcode">Zipcode</label>
+                <input type="text" class="form-control" id="Zipcode" placeholder="Zipcode" name="Zipcode">
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="Purchase">Purchase Price</label>
+                <input type="text" class="form-control" id="Purchase" placeholder="Purchase Price" name="Purchase">
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="purchasetype">Purchase Type</label>
+                <select class="form-control" id="PurchaseType" name="PurchaseType">
+                    @foreach (var item in Model.PurchaseType)
+                    {
+                        <option>@item.PurchaseTypeName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <button id="Save" type="submit" class="btn btn-default">Save</button>
+</form>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+
+    <script>
+
+
+    $('#purchaseForm').validate({
+        rules: {
+            Name: "required" ,
+            Street1: "required"  ,
+            City: "required",
+            Zipcode: {
+                required: true ,
+                digits: true,
+                minlength: 5,
+                maxlength: 5
+            },
+            Phone: {
+                require_from_group: [1, ".contact-group"]
+            },
+            Email: {
+                require_from_group: [1, ".contact-group"]
+            },
+            Purchase: {
+                required: true,
+                digits: true,
+                range: [@Model.PurchasingVechicle.SalesPrice * .95, @Model.PurchasingVechicle.MSRP]
+
+                }
+            },
+        messages: {
+            Zipcode: {
+                minlength: jQuery.validator.format("Please Enter 5 digit zipcode"),
+                maxlength: jQuery.validator.format("Please Enter 5 digit zipcode")
+
+            }
+
+            }
+
+
+
+    });
+
+
+
+    </script>
+
+
+}
