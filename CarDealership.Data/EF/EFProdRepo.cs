@@ -333,13 +333,13 @@ namespace CarDealership.Data.EF
                 string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
                     Path.GetFileName(newName));
 
-                string storeGUID = storage.SavingImage(newInventory.PictureData);
+                //string storeGUID = storage.SavingImage(newInventory.PictureData);
               
 
                 vechicle.File.SaveAs(path);
 
                 newInventory.Picture = newName;
-                newInventory.PictureURL = storage.UriFor(storeGUID);
+                //newInventory.PictureURL = storage.UriFor(storeGUID);
             }
 
             Inventorys.Add(newInventory);
