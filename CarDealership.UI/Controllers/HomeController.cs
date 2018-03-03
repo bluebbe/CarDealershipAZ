@@ -23,6 +23,11 @@ namespace CarDealership.UI.Controllers
             homeView.Featured = repo.GetAllFeatured().ToList();
             homeView.Specials = repo.GetAllSpecials().ToList();
 
+            foreach(var vehicle in homeView.Featured)
+            {
+                vehicle.Picture = AZBlobStorage.Location() + vehicle.Picture;
+            }
+
             return View(homeView);
         }
 
@@ -38,6 +43,7 @@ namespace CarDealership.UI.Controllers
         {
             List<SpecialAd> special = CarDearlershipRespoFacotory.GetRepository().GetAllSpecials().ToList();
 
+            
             return View(special);
         }
 
