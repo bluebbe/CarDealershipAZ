@@ -85,7 +85,7 @@ namespace CarDealership.UI.Controllers
             editVehicle.form.Types = CarDearlershipRespoFacotory.GetRepository().GetAllTypes();
             editVehicle.form.Make = CarDearlershipRespoFacotory.GetRepository().GetAllMakes();
             editVehicle.form.Model = CarDearlershipRespoFacotory.GetRepository().GetModelsForSpecificMake(editVehicle.selectVehicle.Make);
-
+            editVehicle.selectVehicle.Picture = AZBlobStorage.Location() + editVehicle.selectVehicle.Picture;
             return View(editVehicle);
         }
 

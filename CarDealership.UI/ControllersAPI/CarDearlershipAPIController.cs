@@ -259,9 +259,21 @@ namespace CarDealership.UI.ControllersAPI
 
             var output = searchInventoryPerKeyword.
 
-                         Select(s => new { s.InventoryId, s.BodyStyle, s.Color, s.Description, s.File,
-                             s.Interior, s.Make, s.Model, s.Mileage, s.MSRP, s.Picture, s.SalesPrice,s.Transmission, s.Type,s.VIN, s.Year }).Distinct() ;
+                          //Select(s => new { s.InventoryId, s.BodyStyle, s.Color, s.Description, s.File,
+                          //    s.Interior, s.Make, s.Model, s.Mileage, s.MSRP, s.Picture, s.SalesPrice,s.Transmission, s.Type,s.VIN, s.Year }).Distinct() ;
+
+                     Distinct();
+
+            foreach (var listing in output)
+            {
+                listing.Picture = AZBlobStorage.Location() + listing.Picture;
+            }
+
+
+
             var output2 = output.OrderByDescending(p => p.SalesPrice).Take(20);
+
+            
 
             return Json(output, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         }

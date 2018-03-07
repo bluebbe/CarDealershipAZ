@@ -39,7 +39,7 @@ namespace CarDealership.Data.EF
 
 
 
-        public EFProdRepo() :base("CarDealership")
+        public EFProdRepo() : base("CarDealership")
         {
             
         }
@@ -330,13 +330,13 @@ namespace CarDealership.Data.EF
                 string newName = "inventory-" + newInventory.Id + "." + fileName.Last();
 
 
-                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
-                    Path.GetFileName(newName));
+                //string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+                //    Path.GetFileName(newName));
 
-                //string storeGUID = storage.SavingImage(newInventory.PictureData);
+                string storeBlogFile = storage.SavingImage(newInventory.PictureData,newName);
               
 
-                vechicle.File.SaveAs(path);
+                //vechicle.File.SaveAs(path);
 
                 newInventory.Picture = newName;
                 //newInventory.PictureURL = storage.UriFor(storeGUID);
@@ -410,6 +410,8 @@ namespace CarDealership.Data.EF
 
         public void EditVechicle(VechicleViewModel vechicle)
         {
+            Storage storage = new Storage();
+
             var editVehicle = Inventorys.Include("Mdles").Include("Typs").Include("BodyStyles")
                 .Include("Transmissions").Include("Colors").Include("Interiors")
                 .Include("PurchaseTypes").FirstOrDefault(p => p.Id == vechicle.InventoryId);
@@ -433,12 +435,12 @@ namespace CarDealership.Data.EF
             if (editVehicle.Picture != null)
             {
 
-           
-                var oldFile = editVehicle.Picture;
+                storage.DeleteImage(editVehicle.Picture);
+            //    var oldFile = editVehicle.Picture;
                 
-            string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
-                    Path.GetFileName(oldFile));
-            File.Delete(path);
+            //string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+            //        Path.GetFileName(oldFile));
+            //File.Delete(path);
             }
 
             if (vechicle.File != null && vechicle.File.ContentLength > 0)
@@ -449,11 +451,11 @@ namespace CarDealership.Data.EF
                 string[] fileName = vechicle.File.FileName.Split('.');
                 string newName = "inventory-" + editVehicle.Id + "." + fileName.Last();
 
+                string storeBlogFile = storage.SavingImage(editVehicle.PictureData, newName);
+                //string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+                //    Path.GetFileName(newName));
 
-                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
-                    Path.GetFileName(newName));
-
-                vechicle.File.SaveAs(path);
+                //vechicle.File.SaveAs(path);
                 editVehicle.Picture = newName;
                 
             }
@@ -467,14 +469,16 @@ namespace CarDealership.Data.EF
 
         public void DeleteVehicle(int id)
         {
-
+            Storage storage = new Storage();
             Inventory item = Inventorys.Where(i => i.Id == id).FirstOrDefault();
             if (item != null)
             {
-                var file = item.Picture;
-                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
-                        Path.GetFileName(file));
-                File.Delete(path);
+                //var file = item.Picture;
+                //string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+                //        Path.GetFileName(file));
+                //File.Delete(path);
+
+                storage.DeleteImage(item.Picture);
 
                 Inventorys.Remove(item);
                 (this).SaveChanges();

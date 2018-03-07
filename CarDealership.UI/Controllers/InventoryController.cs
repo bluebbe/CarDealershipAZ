@@ -17,6 +17,8 @@ namespace CarDealership.UI.Controllers
         {
             VechicleViewModel repo = CarDearlershipRespoFacotory.GetRepository().GetInventorysById(id);
 
+            repo.Picture = AZBlobStorage.Location() + repo.Picture;
+
             return View(repo);
         }
 
